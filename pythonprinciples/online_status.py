@@ -1,4 +1,4 @@
-"""
+"""Count the number of people who are online.
 
 Author: Dr. Jake Rosenzweig
 Date: 2023-10-31, Happy Halloween!
@@ -25,17 +25,35 @@ The parameter is a dictionary that maps from strings of names to the string
 
 Your function should return the number of people who are online.
 
+Performance Testing:
+====================
+>>> %timeit online_count(statuses)                                                           
+391 ns ± 2.49 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+>>> %timeit online_count_generator(statuses)                                                      
+421 ns ± 5.17 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+>>> %timeit online_count_egsoln1(statuses)                                                   
+279 ns ± 0.668 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+>>> %timeit online_count_egsoln2(statuses)                                                   
+383 ns ± 1.4 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each)
+
 #=======================#
 #=== Lessons Learned ===#
 #=======================#
-
-! DO PERFORMANCE TESTING !
+* Summing a generator is surprisingly the *slowest*! Was this an exception?
+   - Summing a list of bools was faster.
+* Fastest soln was a for-loop, a counter, and unpacking key, val pairs.
+* Can do some performance testing by doing:
+   - >>> python -m cProfile myscript.py
+   - Include the `-s time` flag to sort by most expensive calls up top.
 """
 def online_count(dct):
     return sum([True for val in dct.values() if val == "online"])
 
+def online_count_generator(dct):
+    return sum(True for val in dct.values() if val == "online")
+
 # Example Solution 1.
-def online_count(people):
+def online_count_egsoln1(people):
     count = 0
     for person, status in people.items():
         if status == "online":
@@ -43,7 +61,7 @@ def online_count(people):
     return count
 
 # Example Solution 2.
-def online_count(people):
+def online_count_egsoln2(people):
     return len([p for p in people if people[p] == "online"])
 
 statuses = {
@@ -54,3 +72,6 @@ statuses = {
 
 if __name__ == '__main__':
     print(f'''Should return 2: {online_count(statuses)}''')
+    print(f'''Should return 2: {online_count_generator(statuses)}''')
+    print(f'''Should return 2: {online_count_egsoln1(statuses)}''')
+    print(f'''Should return 2: {online_count_egsoln2(statuses)}''')
