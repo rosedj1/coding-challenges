@@ -41,7 +41,7 @@ Performance Testing:
 #=======================#
 * Summing a generator is surprisingly the *slowest*! Was this an exception?
    - Summing a list of bools was faster.
-* Fastest soln was a for-loop, a counter, and unpacking key, val pairs.
+* Fastest soln was a for loop, a counter, and unpacking key, val pairs.
 * Can do some performance testing by doing:
    - >>> python -m cProfile myscript.py
    - Include the `-s time` flag to sort by most expensive calls up top.
