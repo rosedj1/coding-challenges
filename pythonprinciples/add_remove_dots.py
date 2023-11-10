@@ -74,6 +74,3 @@ if __name__ == '__main__':
     add_dots_eg(s_test)
     remove_dots_eg('t.e.s.t')
     remove_dots_eg(add_dots_eg('test'))
-    # print(f"Should return 't.e.s.t:' {add_dots(s_test)}")
-    # print(f"Should return 'test:' {remove_dots('t.e.s.t')}")
-    # print(f"Should return 'test:' {remove_dots(add_dots('test'))}")
